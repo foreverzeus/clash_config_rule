@@ -24,11 +24,10 @@ jobs:
           echo "  - $line" >> priority_proxy.yaml
         done < priority_proxy.list
 
-    - name: Commit and push if changed
+    - name: Commit and push if there are changes
       run: |
         git config --local user.email "foreverzeus@qq.com"
-        git config --local user.name "Your Name"
-        git add priority_proxy.yaml
-        git diff --staged --quiet || (git commit -m "Update priority_proxy.yaml")
-        # 使用仓库的secret，用你的PAT安全地推送
-        git push https://${{ secrets.work_flow  }}@github.com/${{ github.repository }} HEAD:main
+        git config --local user.name "GitHub Actions"
+        git add .
+        git commit -m "Automated changes" -a || echo "No changes to commit"
+        git push
