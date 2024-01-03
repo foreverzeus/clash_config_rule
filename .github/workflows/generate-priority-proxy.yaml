@@ -27,6 +27,8 @@ jobs:
     - name: Commit and push if changed
       run: |
         git config --local user.email "foreverzeus@qq.com"
-        git config --local user.name "foreverzeus"
+        git config --local user.name "Your Name"
         git add priority_proxy.yaml
-        git diff --staged --quiet || (git commit -m "Update priority_proxy.yaml"; git push)
+        git diff --staged --quiet || (git commit -m "Update priority_proxy.yaml")
+        # 使用仓库的secret，用你的PAT安全地推送
+        git push https://${{ secrets.work_flow  }}@github.com/${{ github.repository }} HEAD:main
