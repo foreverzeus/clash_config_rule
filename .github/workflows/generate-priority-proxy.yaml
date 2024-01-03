@@ -26,5 +26,7 @@ jobs:
 
     - name: Commit and push if changed
       run: |
+        git config --local user.email "foreverzeus@qq.com"
+        git config --local user.name "foreverzeus"
         git add priority_proxy.yaml
         git diff --staged --quiet || (git commit -m "Update priority_proxy.yaml"; git push)
