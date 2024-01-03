@@ -16,6 +16,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }} # 确保这里使用了 GITHUB_TOKEN
+
 
     - name: Generate priority_proxy.yaml
       run: |
@@ -24,10 +27,10 @@ jobs:
           echo "  - $line" >> priority_proxy.yaml
         done < priority_proxy.list
 
-    - name: Commit and push if there are changes
+    - name: Push changes
       run: |
-        git config --local user.email "foreverzeus@qq.com"
-        git config --local user.name "GitHub Actions"
+        git config --global user.name 'foreverzeus'
+        git config --global user.email 'foreverzeus@qq.com'
         git add .
-        git commit -m "Automated changes" -a || echo "No changes to commit"
-        git push
+        git commit -m "Your commit message" || echo "No changes to commit"
+        git push origin HEAD:main
