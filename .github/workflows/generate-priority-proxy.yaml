@@ -33,4 +33,4 @@ jobs:
         git config --global user.email 'foreverzeus@qq.com'
         git add .
         git commit -m "Your commit message" || echo "No changes to commit"
-        git push origin HEAD:main
+        git push https://${{ secrets.work_flow  }}@github.com/${{ github.repository }} HEAD:main
