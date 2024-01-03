@@ -1,0 +1,30 @@
+name: Generate priority_proxy.yaml
+
+# 当 priority_proxy.list 文件有变更时触发
+on:
+  push:
+    paths:
+      - 'priority_proxy.list'
+  pull_request:
+    paths:
+      - 'priority_proxy.list'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Generate priority_proxy.yaml
+      run: |
+        echo "payload:" > priority_proxy.yaml
+        while IFS= read -r line; do
+          echo "  - $line" >> priority_proxy.yaml
+        done < priority_proxy.list
+
+    - name: Commit and push if changed
+      run: |
+        git add priority_proxy.yaml
+        git diff --staged --quiet || (git commit -m "Update priority_proxy.yaml"; git push)
