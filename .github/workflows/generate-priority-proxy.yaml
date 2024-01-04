@@ -5,32 +5,29 @@ on:
   push:
     paths:
       - 'priority_proxy.list'
-  pull_request:
-    paths:
-      - 'priority_proxy.list'
+      - 'priority_direct.list'
 
 jobs:
-  build:
+  update-format:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }} # 确保这里使用了 GITHUB_TOKEN
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      
+      - name: Update priority_proxy.list format
+        run: |
+          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_proxy.list > temp && mv temp priority_proxy.list
 
+      - name: Update priority_direct.list format
+        run: |
+          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_direct.list > temp && mv temp priority_direct.list
 
-    - name: Generate priority_proxy.yaml
-      run: |
-        echo "payload:" > priority_proxy.yaml
-        while IFS= read -r line; do
-          echo "  - $line" >> priority_proxy.yaml
-        done < priority_proxy.list
-
-    - name: Push changes
-      run: |
-        git config --global user.name 'foreverzeus'
-        git config --global user.email 'foreverzeus@qq.com'
-        git add .
-        git commit -m "Your commit message" || echo "No changes to commit"
-        git push https://${{ secrets.WORK_FLOW  }}@github.com/${{ github.repository }} HEAD:main
+  
+      - name: Push changes
+        run: |
+          git config --global user.name 'foreverzeus'
+          git config --global user.email 'foreverzeus@qq.com'
+          git add .
+          git commit -m "auto gen .yaml"
+          git push https://x-access-token:${{ secrets.work_flow }}@github.com/${{ github.repository }} HEAD:main
