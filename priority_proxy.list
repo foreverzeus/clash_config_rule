@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DOMAIN-KEYWORD,testtesttest
 
 
@@ -6,4 +7,9 @@ DOMAIN-KEYWORD,testtesttest
 
 
 
+
+=======
+payload:
+  - DOMAIN-KEYWORD,gaoogle
+>>>>>>> 8ce5066af74d8418209b37b1ab9964f282d3a42a
 
