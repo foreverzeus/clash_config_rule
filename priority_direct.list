@@ -1,6 +1,1 @@
-payload:
-  - <<<<<<< HEAD
-  - DOMAIN-KEYWORD,testtesttest
-  - =======
-  - payload:
-  - >>>>>>> 8ce5066af74d8418209b37b1ab9964f282d3a42a
+DOMAIN-KEYWORD,testtesttest

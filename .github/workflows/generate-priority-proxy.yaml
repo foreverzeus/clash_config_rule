@@ -17,11 +17,11 @@ jobs:
       
       - name: Update priority_proxy.list format
         run: |
-          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_proxy.list > temp && mv temp priority_proxy.list
+          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_proxy.list > priority_proxy.yaml
 
       - name: Update priority_direct.list format
         run: |
-          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_direct.list > temp && mv temp priority_direct.list
+          awk 'BEGIN { print "payload:" } NF { print "  - "$0 }' priority_direct.list > priority_direct.yaml
 
   
       - name: Push changes
