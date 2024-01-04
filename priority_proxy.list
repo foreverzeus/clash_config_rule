@@ -1,8 +1,2 @@
-DOMAIN-KEYWORD,gaoogle
-
-
-
-
-
-
-
+payload:
+  - DOMAIN-KEYWORD,gaoogle
